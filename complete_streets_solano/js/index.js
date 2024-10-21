@@ -36,7 +36,7 @@ const slideOptions = {
     style: (feature) => {
       if (feature.properties.fatal_or_s === 1) {
         return {
-          radius: 7,    
+          radius: 7,
           fillColor: 'firebrick',
           color: 'firebrick',
           weight: 3,
@@ -72,9 +72,9 @@ const slideOptions = {
         };
       }
       return L.circleMarker(latlng, options);
-    }
+    },
   },
-  'vz_hin_2020': { 
+  'vz_hin_2020': {
     style: (feature) => {
       return {
         color: 'firebrick',
@@ -83,20 +83,20 @@ const slideOptions = {
     },
   },
   'hin_walnut': { 
-  style: (feature) => {
-    if (feature.properties.objectid === 238) {
-      return {
-        color: 'goldenrod',
-        fillColor: 'goldenrod'
-        };
-    } else {
-      return {
-        color: 'firebrick',
-        fillColor: 'firebrick'
+    style: (feature) => {
+      if (feature.properties.objectid === 238) {
+        return {
+          color: 'goldenrod',
+          fillColor: 'goldenrod',
+          };
+      } else {
+        return {
+          color: 'firebrick',
+          fillColor: 'firebrick',
         };
       }
-    }
-  }
+    },
+  },
 };
 
 
