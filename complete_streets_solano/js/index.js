@@ -6,27 +6,25 @@ const mapboxKey = 'pk.eyJ1Ijoic29sYW5vYSIsImEiOiJjbTE3emMzY20wNXF4MmtxMm1vdXJyNX
 const mapboxStyle = 'mapbox/dark-v11';
 
 const baseTileLayer = L.tileLayer(`https://api.mapbox.com/styles/v1/${mapboxStyle}/tiles/512/{z}/{x}/{y}{r}?access_token=${mapboxKey}`, {
-    tileSize: 512,
-    zoomOffset: -1,
-    detectRetina: true,
-    minZoom: 5,
-    maxZoom: 22,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  });
+  tileSize: 512,
+  zoomOffset: -1,
+  detectRetina: true,
+  minZoom: 5,
+  maxZoom: 22,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+});
 baseTileLayer.addTo(map);
 
 // ## Interface Elements
 const container = document.querySelector('.slide-section');
 const slides = document.querySelectorAll('.slide');
 
-function isWalnut(feature) {
-  return feature.properties.STNAME === "WALNUT ST" && feature.properties.L_HUNDRED >= 3300;
-};
-
 
 const slideOptions = {
   'phl_streets': {
-    filter: (isWalnut),
+    filter: function(feature) {
+      return feature.properties.STNAME === "WALNUT ST" && feature.properties.L_HUNDRED >= 3300;
+    },
     style: (feature) => {
       return {
         color: 'firebrick',
