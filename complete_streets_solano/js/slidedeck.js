@@ -4,12 +4,17 @@
 class SlideDeck {
   /**
    * Constructor for the SlideDeck object.
+   * @param {Node} container The container element for the slides.
    * @param {NodeList} slides A list of HTML elements containing the slide text.
    * @param {L.map} map The Leaflet map where data will be shown.
+   * @param {object} slideOptions The options to create each slide's L.geoJSON
+   *                              layer, keyed by slide ID.
    */
-  constructor(slides, map) {
+  constructor(container, slides, map, slideOptions = {}) {
+    this.container = container;
     this.slides = slides;
     this.map = map;
+    this.slideOptions = slideOptions;
 
     this.dataLayer = L.layerGroup().addTo(map);
     this.currentSlideIndex = 0;
@@ -24,15 +29,18 @@ class SlideDeck {
    * FeatureCollection object.
    *
    * @param {object} data A GeoJSON FeatureCollection object
+   * @param {object} options Options to pass to L.geoJSON
    * @return {L.GeoJSONLayer} The new GeoJSON layer that has been added to the
    *                          data layer group.
    */
-  updateDataLayer(data) {
+  updateDataLayer(data, options) {
     this.dataLayer.clearLayers();
-    const geoJsonLayer = L.geoJSON(data, {
+
+    const defaultOptions = {
       pointToLayer: (p, latlng) => L.marker(latlng),
       style: (feature) => feature.properties.style,
-    })
+    };
+    const geoJsonLayer = L.geoJSON(data, options || defaultOptions)
         .bindTooltip((l) => l.feature.properties.label)
         .addTo(this.dataLayer);
 
@@ -75,7 +83,8 @@ class SlideDeck {
    */
   async syncMapToSlide(slide) {
     const collection = await this.getSlideFeatureCollection(slide);
-    const layer = this.updateDataLayer(collection);
+    const options = this.slideOptions[slide.id];
+    const layer = this.updateDataLayer(collection, options);
 
     /**
      * Create a bounds object from a GeoJSON bbox array.
@@ -167,7 +176,7 @@ class SlideDeck {
    * Calculate the current slide index based on the current scroll position.
    */
   calcCurrentSlideIndex() {
-    const scrollPos = window.scrollY;
+    const scrollPos = window.scrollY - this.container.offsetTop;
     const windowHeight = window.innerHeight;
 
     let i;
