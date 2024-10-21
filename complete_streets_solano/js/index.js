@@ -78,17 +78,17 @@ const slideOptions = {
     style: (feature) => {
       return {
         color: 'firebrick',
-        fillColor: 'firebrick'
+        fillColor: 'firebrick',
       };
     },
   },
-  'hin_walnut': { 
+  'hin_walnut': {
     style: (feature) => {
       if (feature.properties.objectid === 238) {
         return {
           color: 'goldenrod',
           fillColor: 'goldenrod',
-          };
+        };
       } else {
         return {
           color: 'firebrick',
