@@ -23,7 +23,7 @@ const slides = document.querySelectorAll('.slide');
 const slideOptions = {
   'phl_streets': {
     filter: function(feature) {
-      return feature.properties.STNAME === "WALNUT ST" && feature.properties.L_HUNDRED >= 3300;
+      return feature.properties.STNAME === 'WALNUT ST' && feature.properties.L_HUNDRED >= 3300;
     },
     style: (feature) => {
       return {
@@ -36,19 +36,19 @@ const slideOptions = {
     style: (feature) => {
       if (feature.properties.fatal_or_s === 1) {
         return {
-          radius: 7,          
+          radius: 7,    
           fillColor: 'firebrick',
           color: 'firebrick',
           weight: 3,
-          fillOpacity: 0.5
+          fillOpacity: 0.5,
         };
       } else {
         return {
-          radius: 5,         
-          fillColor: 'lightskyblue',   
+          radius: 5,
+          fillColor: 'lightskyblue',
           color: 'lightskyblue',
           weight: 2,
-          fillOpacity: 0.5
+          fillOpacity: 0.5,
         };
       }
     },
@@ -56,29 +56,29 @@ const slideOptions = {
       let options;
       if (feature.properties.fatal_or_s === 1) {
         options = {
-          radius: 7,          
+          radius: 7,
           fillColor: 'firebrick',
           color: 'firebrick',
           weight: 3,
-          fillOpacity: 0.5
+          fillOpacity: 0.5,
         };
       } else {
         options = {
-          radius: 5,         
-          fillColor: 'lightskyblue',   
+          radius: 5,
+          fillColor: 'lightskyblue',
           color: 'lightskyblue',
           weight: 2,
-          fillOpacity: 0.5
+          fillOpacity: 0.5,
         };
       }
       return L.circleMarker(latlng, options);
-      }
-    },
-'vz_hin_2020': { 
-  style: (feature) => {
-    return {
-      color: 'firebrick',
-      fillColor: 'firebrick'
+    }
+  },
+  'vz_hin_2020': { 
+    style: (feature) => {
+      return {
+        color: 'firebrick',
+        fillColor: 'firebrick'
       };
     },
   },
